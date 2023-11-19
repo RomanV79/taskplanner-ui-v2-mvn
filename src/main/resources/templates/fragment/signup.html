@@ -1,0 +1,23 @@
+<div th:fragment="signup" class="col-3 mx-auto mt-5" id="sign-up-wrapper">
+    <form id="sign-up">
+        <h1 class="h3 mb-3 fw-normal text-center">Please sign up</h1>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="name" placeholder="Your name" name="name" autocomplete="name" required>
+            <label for="name">Your name</label>
+        </div>
+        <div class="form-floating">
+            <input type="email" class="form-control" id="username" placeholder="name@example.com" name="username" autocomplete="username" required>
+            <label for="username">Email address</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="password" placeholder="Password" name="password" autocomplete="new-password" required>
+            <label for="password">Password</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="password-confirm" placeholder="Password" name="confirmPassword" autocomplete="new-password" required>
+            <label for="password-confirm">Confirm password</label>
+        </div>
+        <div class="sign-up-error mt-1 mb-0 p-1 alert alert-warning"><p class="text-center m-0 p-0">Error</p></div>
+        <button class="w-100 btn btn-lg btn-primary mt-2" type="submit">Sign up</button>
+    </form>
+</div>

@@ -1,0 +1,22 @@
+<header th:fragment="header">
+    <nav class="navbar opacity-75 border-bottom">
+        <div class="container">
+            <div class="bg-primary-subtle">
+                <img src="/images/task-planner-2-logo.png" width="200px" alt="logo"/>
+            </div>
+            <div class="d-flex auth-true" id="header-have-auth">
+                <div class="d-flex justify-content-center align-items-center rounded-circle"
+                     style="width: 50px; height: 50px; background-color: #317bea;">
+                    <span style="font-size: 24px;" id="profile-logo-name">VR</span>
+                </div>
+                <div class="d-flex justify-content-center align-items-center ms-3">
+                    <a class="" href="/logout" id="logout">Logout</a>
+                </div>
+            </div>
+            <div class="d-flex auth-false" id="header-havenot-auth">
+                <a class="" href="/sign-in" id="sign-in">Sign In</a>
+                <a class="ms-3" href="/sign-up" id="sign-up">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+</header>

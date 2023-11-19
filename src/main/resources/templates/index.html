@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Personal Task planner</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/custom.css" rel="stylesheet" type="text/css">
+    <script
+            src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+<div class="head-abs"></div>
+<header th:replace="~{fragment/header :: header}"></header>
+<main>
+    <div th:replace="~{fragment/signin::signin}"></div>
+    <div th:replace="~{fragment/signup::signup}"></div>
+    <div class="col-3 mx-auto mt-5 rounded-2 bg-light p-3 shadow-lg" id="not-confirmed">
+        <p>Please, confirm your email before start use application, you will find link in your email.</p>
+        <p>If you didn't receive email, click link and we send email again.</p>
+        <a href="" id="send-email-again">Send email again</a>
+        <div class="alert-warning mt-2 p-2 rounded-2" id="alert-confirm-email">Something wrong. Try again latter...</div>
+    </div>
+    <div class="col-3 mx-auto mt-5 rounded-2 bg-light p-3 shadow-lg" id="confirm-without-sign-in">
+        <p>Please, sign-in before confirm your email.</p>
+        <p class="mb-0">Sign in and follow link one more time.</p>
+        <div class="alert-warning mt-2 p-2 rounded-2" id="alert-confirm-without-sign-in">Something wrong. Try again latter...</div>
+    </div>
+    <div class="container-xl mt-5">
+        <div class="row justify-content-center" id="board">
+            <div class="col-3 status-column" id="new-tasks">
+                <div class="d-flex">
+                    <h2>New</h2>
+                    <p class="ps-1" id="new-task-total-qht">0</p>
+                </div>
+                <div id="new-tasks-container">
+
+                </div>
+            </div>
+            <div class="col-3 status-column done">
+                <div class="d-flex">
+                    <h2>Done</h2>
+                    <p class="ps-1" id="done-task-total-qht">0</p>
+                </div>
+                <div id="done-tasks-container">
+                    <!--                    <div th:replace="~{fragment/card :: card}"></div>-->
+                    <!--                    <div th:replace="~{fragment/card :: card}"></div>-->
+                </div>
+            </div>
+            <div class="col-3 status-column">
+                <div class="d-flex">
+                    <h2>Create new</h2>
+                </div>
+                <div class="new-task-form" style="margin-top: 10px">
+                    <form class="form">
+                        <div>
+                            <input name="title" id="new-task-title" type="text" placeholder="Buy cat food for Tom"
+                                   class="border-0 w-100 rounded-2 p-2" style="outline: none;" required>
+                        </div>
+                        <div class="mt-3">
+                            <textarea name="description" id="new-task-description" rows="6"
+                                      placeholder="And look for an anti-mouse bowl in the store, because Jerry will take everything away from Tom again"
+                                      class="border-0 w-100 rounded-2 p-2" style="outline: none;"></textarea>
+                        </div>
+                        <div class="mt-3">
+                            <input name="status" id="new-task-status" type="checkbox"
+                                   style="width: 18px; height: 18px;">
+                            <label for="new-task-status">Done</label>
+                        </div>
+                        <div class="mt-3">
+                            <input type="submit" class="btn btn-outline-secondary btn-new-task" value="Create">
+                        </div>
+                    </form>
+                    <div class="create-new-task-error mt-1 mb-0 p-1 alert alert-warning"><p class="text-center m-0 p-0">
+                        Task not created, please try again later</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="delete-modal">
+        <div class="delete-modal__content" id="delete-modal__content">
+            <form id="delete-modal__form">
+                <div class="task-hidden-id">
+                    <input type="hidden" name="id" readonly>
+                </div>
+                <div style="margin-top: 20px; border: none">
+                    <input id="delete-modal__title" name="title" class="w-100 rounded-2 p-2 border-0"
+                           style="outline: none;" readonly>
+                </div>
+                <div style="margin-top: 5px;">
+                    <textarea id="delete-modal__description" name="description" class="border-0 w-100 rounded-2 p-2"
+                              rows="3" style="outline: none; resize: vertical; overflow: hidden" readonly></textarea>
+                </div>
+                <div id="delete-modal__created" style="margin-top: 10px"></div>
+                <div style="margin-top: 20px;">
+                    <input name="status" id="delete-modal__status" type="checkbox" onclick="return false"
+                           style="width: 18px; height: 18px;" readonly>
+                    <label for="edit-modal__status">Done</label>
+                </div>
+            </form>
+        </div>
+        <div style="display: flex; justify-content: right">
+            <div class="modal__delete-btn d-flex justify-content-center" style="width: 70px">Delete</div>
+        </div>
+        <span class="modal__close">X</span>
+    </div>
+    <div class="modal" id="edit-modal">
+        <div class="edit-modal__content" id="edit-modal__content">
+            <form id="edit-modal__form">
+                <div class="task-hidden-id">
+                    <input type="hidden" name="id">
+                </div>
+                <div style="margin-top: 20px; border: none">
+                    <input id="edit-modal__title" name="title" class="w-100 rounded-2 p-2 border-0"
+                           style="outline: none;" required>
+                </div>
+                <div style="margin-top: 5px">
+                    <textarea id="edit-modal__description" name="description" rows="6"
+                              class="border-0 w-100 rounded-2 p-2" style="outline: none;"></textarea>
+                </div>
+                <div id="edit-modal__created" style="margin-top: 10px"></div>
+                <div style="margin-top: 20px;">
+                    <input name="status" id="edit-modal__status" type="checkbox"
+                           style="width: 18px; height: 18px;">
+                    <label for="edit-modal__status">Done</label>
+                </div>
+            </form>
+        </div>
+        <div style="display: flex; justify-content: right">
+            <div class="modal__save-btn justify-content-center d-flex" style="width: 70px">Save</div>
+        </div>
+        <span class="modal__close">X</span>
+    </div>
+    <div id="overlay-modal"></div>
+</main>
+<footer th:replace="~{fragment/footer :: footer}"></footer>
+<script src="/js/custom.js"></script>
+</body>
+</html>
