@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+    var host = 'rest'
     // elements of forms
     let signInForm = $("form#sign-in");
     let signInWrapper = $("#sign-in-wrapper");
@@ -53,7 +54,7 @@ $(document).ready(function () {
         } else {
             // console.log("You are auth and have confirm token")
             $.ajax({
-                url: `http://localhost:8085/api/v1/confirmation-email?token=${confirmToken}`,
+                url: host + `/api/v1/confirmation-email?token=${confirmToken}`,
                 type: "get",
                 timeout: 10000,
                 headers: {
@@ -103,7 +104,7 @@ $(document).ready(function () {
         const json = convertFormToJSON(form);
 
         $.ajax({
-            url: "http://localhost:8085/api/v1/tasks",
+            url: host + "/api/v1/tasks",
             type: "post",
             contentType: "application/json",
             data: JSON.stringify(json),
@@ -201,7 +202,7 @@ $(document).ready(function () {
         const task = convertFormToJSON(form);
 
         $.ajax({
-            url: "http://localhost:8085/api/v1/tasks",
+            url: host + "/api/v1/tasks",
             type: "post",
             contentType: "application/json",
             timeout: 10000,
@@ -242,7 +243,7 @@ $(document).ready(function () {
         const json = convertFormToJSON(form);
 
         $.ajax({
-            url: "http://localhost:8085/api/v1/auth/authenticate",
+            url: host + "/api/v1/auth/authenticate",
             type: "post",
             contentType: "application/json",
             dataType: "json",
@@ -295,7 +296,7 @@ $(document).ready(function () {
         // console.log(json)
 
         $.ajax({
-            url: "http://localhost:8085/api/v1/auth/register",
+            url: host + "/api/v1/auth/register",
             type: "post",
             contentType: "application/json",
             dataType: "json",
@@ -338,7 +339,7 @@ $(document).ready(function () {
         $("#alert-confirm-email").hide();
         // console.log("click send email with confirm again");
         $.ajax({
-            url: "http://localhost:8085/api/v1/confirmation-email/send-again",
+            url: host + "/api/v1/confirmation-email/send-again",
             type: "get",
             timeout: 10000,
             headers: {
@@ -385,7 +386,7 @@ function onHeaderNotAuth() {
 
 function renderTasksOnBoard() {
     $.ajax({
-        url: "http://localhost:8085/api/v1/tasks",
+        url: host + "/api/v1/tasks",
         type: "get",
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem("token")
@@ -446,7 +447,7 @@ function createTaskCard(task) {
 
 function deleteTask(id) {
     $.ajax({
-        url: `http://localhost:8085/api/v1/tasks/${id}`,
+        url: host + `/api/v1/tasks/${id}`,
         type: "delete",
         contentType: "application/json",
         timeout: 10000,
