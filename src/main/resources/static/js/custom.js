@@ -19,7 +19,7 @@ $(document).ready(function () {
     let signUpError = $(".sign-up-error")
     let logoutRef = $("#logout")
 
-    if (getJwtFromLocalStorage() !== '') {
+    if (getJwtFromLocalStorage() !== '' && getJwtFromLocalStorage() !== null) {
         // start page with auth
         if (!isConfirmed()) {
             $("#not-confirmed").show();
@@ -156,7 +156,7 @@ $(document).ready(function () {
         });
     });
 
-// handler for delete button in delete form
+    // handler for delete button in delete form
     $(".modal").on("click", ".modal__delete-btn", function (e) {
         const form = $(this).closest(".modal").find("form");
         const task = convertFormToJSON(form);
