@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    var host = 'rest'
+    var host = 'http://rest:8080'
     // elements of forms
     let signInForm = $("form#sign-in");
     let signInWrapper = $("#sign-in-wrapper");

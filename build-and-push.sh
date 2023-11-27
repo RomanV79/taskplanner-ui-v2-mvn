@@ -1,7 +1,7 @@
 #!/bin/bash
 
 IMAGE_NAME="taskplanner-ui"
-TAG="v1.0.1"
+TAG="v1.0.3"
 DOCKERHUB_NAME="romanv79"
 
 FULL_NAME="${DOCKERHUB_NAME}/${IMAGE_NAME}:${TAG}"
