@@ -1,6 +1,7 @@
+const host = 'http://80.90.186.228:8090';
+// const host = 'http://localhost:8085';
 $(document).ready(function () {
 
-    var host = 'http://rest:8080'
     // elements of forms
     let signInForm = $("form#sign-in");
     let signInWrapper = $("#sign-in-wrapper");
@@ -95,7 +96,6 @@ $(document).ready(function () {
         signInWrapper.show()
         board.hide();
         $("#not-confirmed").hide();
-
     });
 
     newTaskForm.on("submit", function (e) {
